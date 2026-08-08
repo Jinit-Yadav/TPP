@@ -3,8 +3,8 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Study Planner — A timetable you can actually follow',
-  description: 'Build a realistic study timetable around your subjects, available hours, and goals.',
+  title: 'Study Planner — Plan smarter, not longer',
+  description: 'Build, save, and improve a realistic study timetable around your subjects, available hours, and goals.',
   generator: 'v0.app',
 }
 
