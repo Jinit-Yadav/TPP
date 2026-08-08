@@ -1,0 +1,70 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background); --color-foreground: var(--foreground); --color-card: var(--card); --color-card-foreground: var(--card-foreground); --color-popover: var(--popover); --color-popover-foreground: var(--popover-foreground); --color-primary: var(--primary); --color-primary-foreground: var(--primary-foreground); --color-secondary: var(--secondary); --color-secondary-foreground: var(--secondary-foreground); --color-muted: var(--muted); --color-muted-foreground: var(--muted-foreground); --color-accent: var(--accent); --color-accent-foreground: var(--accent-foreground); --color-destructive: var(--destructive); --color-border: var(--border); --color-input: var(--input); --color-ring: var(--ring); --radius-sm: calc(var(--radius) * 0.6); --radius-md: calc(var(--radius) * 0.8); --radius-lg: var(--radius); --radius-xl: calc(var(--radius) * 1.4); --font-sans: var(--font-body); --font-mono: var(--font-display);
+}
+
+:root { color-scheme: light; --background: oklch(0.97 0.018 83); --foreground: oklch(0.22 0.025 55); --card: oklch(0.99 0.009 84); --card-foreground: oklch(0.22 0.025 55); --primary: oklch(0.62 0.17 35); --primary-foreground: oklch(0.99 0.01 85); --secondary: oklch(0.93 0.025 80); --secondary-foreground: oklch(0.28 0.03 55); --muted: oklch(0.93 0.025 80); --muted-foreground: oklch(0.52 0.035 55); --accent: oklch(0.9 0.065 75); --accent-foreground: oklch(0.32 0.05 45); --destructive: oklch(0.58 0.2 28); --border: oklch(0.86 0.035 75); --input: oklch(0.84 0.04 75); --ring: oklch(0.62 0.17 35); --radius: 0.75rem; --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif; --font-display: 'Space Mono', ui-monospace, monospace; }
+
+* { @apply border-border outline-ring/50; }
+html { background: var(--background); scroll-behavior: smooth; }
+body { @apply bg-background text-foreground; font-family: var(--font-body); }
+
+.paper-card, .day-card { background: var(--card); border: 1px solid var(--border); box-shadow: 0 14px 40px oklch(0.35 0.04 55 / 0.07); }
+.paper-card { background-image: linear-gradient(oklch(0.4 0.03 70 / 0.025) 1px, transparent 1px); background-size: 100% 28px; }
+.field-label { @apply mb-3 block text-sm font-bold; }
+.control-row { @apply flex h-12 items-center overflow-hidden rounded-xl border border-input bg-background; }
+.icon-button { @apply grid size-12 shrink-0 place-items-center text-muted-foreground transition-colors hover:bg-accent hover:text-foreground disabled:opacity-40; }
+.number-input { @apply h-full w-12 bg-transparent text-center font-mono text-base font-bold outline-none; }
+.control-suffix { @apply pr-2 text-sm text-muted-foreground; }
+.time-input-wrap { @apply flex h-12 items-center gap-3 rounded-xl border border-input bg-background px-4 transition-shadow focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20; }
+.time-input-wrap svg { @apply text-primary; }
+.time-input { @apply min-w-0 flex-1 bg-transparent font-mono text-base font-bold outline-none; }
+.subject-row { @apply flex items-center gap-2; }
+.subject-input, .difficulty-select { @apply h-11 rounded-xl border border-input bg-background px-3 text-sm outline-none transition-shadow focus:border-primary focus:ring-2 focus:ring-primary/20; }
+.subject-input { @apply min-w-0 flex-1; }
+.difficulty-select { @apply w-28 shrink-0; }
+.remove-button { @apply grid size-9 shrink-0 place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive; }
+.add-button { @apply mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-primary transition-colors hover:text-primary/75 disabled:opacity-40; }
+.toggle-row { @apply flex cursor-pointer items-center justify-between gap-4 rounded-xl border border-border bg-background/60 p-4; }
+.toggle-input { @apply sr-only; }
+.toggle-track { @apply relative h-6 w-11 rounded-full bg-muted transition-colors; }
+.toggle-track span { @apply absolute left-1 top-1 size-4 rounded-full bg-background shadow-sm transition-transform; }
+.toggle-input:checked + .toggle-track { @apply bg-primary; }
+.toggle-input:checked + .toggle-track span { @apply translate-x-5; }
+.primary-button, .premium-button { @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-5 text-sm font-bold transition-all hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-40; }
+.primary-button { @apply bg-primary text-primary-foreground shadow-[0_7px_0_oklch(0.46_0.13_35)]; }
+.primary-button:active, .premium-button:active { @apply translate-y-0 shadow-none; }
+.secondary-button { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-border bg-card px-4 text-xs font-bold transition-colors hover:bg-accent; }
+.premium-button { @apply w-full bg-foreground text-background; }
+.error-box { @apply flex flex-col gap-1 rounded-xl border border-destructive/25 bg-destructive/8 px-4 py-3 text-xs leading-5 text-destructive; }
+.eyebrow, .premium-label { @apply text-xs font-bold uppercase tracking-[0.14em] text-primary; }
+.step { @apply flex items-start gap-3; }
+.step > span { @apply font-mono text-xs font-bold text-primary; }
+.step strong { @apply text-sm; }
+.step p { @apply mt-1 text-xs leading-5 text-muted-foreground; }
+.day-card { @apply overflow-hidden rounded-2xl; }
+.day-heading { @apply flex items-center justify-between border-b border-border bg-muted/50 px-5 py-4 font-mono text-xs font-bold; }
+.day-heading span:last-child { @apply font-sans font-medium text-muted-foreground; }
+.schedule-row { @apply flex min-h-16 items-center gap-3 border-b border-border/70 px-4 py-3 last:border-0 sm:gap-4 sm:px-5; }
+.schedule-row time { @apply w-16 shrink-0 text-[11px] font-semibold text-muted-foreground; }
+.session-dot { @apply size-2 shrink-0 rounded-full; }
+.session-focus { @apply bg-primary; }
+.session-practice { @apply bg-foreground; }
+.session-revision { @apply bg-accent-foreground; }
+.session-break { @apply bg-muted-foreground; }
+.session-pill { @apply rounded-full px-2 py-1 text-[10px] font-bold; }
+.session-pill.session-focus { @apply bg-primary/10 text-primary; }
+.session-pill.session-practice { @apply bg-foreground/10 text-foreground; }
+.session-pill.session-revision { @apply bg-accent text-accent-foreground; }
+.session-pill.session-break { @apply bg-muted text-muted-foreground; }
+.premium-card { @apply rounded-2xl border border-primary/25 bg-accent/45 p-6; }
+.modal-backdrop { @apply fixed inset-0 z-50 grid place-items-center bg-foreground/35 px-5 backdrop-blur-sm; }
+.modal-card { @apply relative w-full max-w-sm rounded-2xl border border-border bg-card p-7 shadow-2xl; }
+.modal-close { @apply absolute right-4 top-4 grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground; }
+
+@media (max-width: 640px) { .paper-card { background-size: 100% 24px; } .schedule-row time { width: 53px; font-size: 10px; } .session-pill { padding-inline: 6px; } }
