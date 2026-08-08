@@ -1,5 +1,5 @@
 'use client'
 import { useState } from 'react'
-import { Download } from 'lucide-react'
+import { Download, LockKeyhole } from 'lucide-react'
 import { jsPDF } from 'jspdf'
 export function DownloadPlanPdf({ plan }: { plan: { title: string; planData: any } }) { const [busy, setBusy] = useState(false); function download() { setBusy(true); const pdf = new jsPDF(); pdf.setFont('helvetica', 'bold'); pdf.setFontSize(20); pdf.text(plan.title, 20, 25); pdf.setFont('helvetica', 'normal'); pdf.setFontSize(11); const data = plan.planData; pdf.text(`${data.days} days | ${data.hours} hours/day | Start ${data.startTime}`, 20, 36); let y = 50; (data.schedule || []).forEach((day: any[], index: number) => { if (y > 270) { pdf.addPage(); y = 20 } pdf.setFont('helvetica', 'bold'); pdf.text(`Day ${index + 1}`, 20, y); y += 7; pdf.setFont('helvetica', 'normal'); day.forEach((session: any) => { if (y > 280) { pdf.addPage(); y = 20 } pdf.text(`${session.time}  ${session.title} - ${session.subject} (${session.duration})`, 24, y); y += 6 }); y += 4 }); pdf.save(`${plan.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.pdf`); setBusy(false) } return <button className="secondary-button" onClick={download} disabled={busy}><Download size={15} /> {busy ? 'Preparing…' : 'Download PDF'}</button> }
