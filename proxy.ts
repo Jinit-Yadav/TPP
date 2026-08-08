@@ -1,13 +1,7 @@
 import { type NextRequest } from 'next/server'
-import { updateSession } from '@/lib/supabase/proxy'
+import { NextResponse } from 'next/server'
+import { getCurrentUser } from '@/lib/auth'
 
-export async function proxy(request: NextRequest) {
-  return updateSession(request)
-}
-
-// Keep a default export for preview/runtime versions that still resolve proxy files through the legacy loader.
+export async function proxy(request: NextRequest) { if (request.nextUrl.pathname.startsWith('/dashboard') || request.nextUrl.pathname.startsWith('/admin')) { const user = await getCurrentUser(); if (!user) return NextResponse.redirect(new URL('/auth/login', request.url)) } return NextResponse.next() }
 export default proxy
-
-export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)'],
-}
+export const config = { matcher: ['/dashboard/:path*', '/admin/:path*'] }
