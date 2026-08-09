@@ -1,0 +1,2 @@
+import Link from 'next/link'
+export default function SignUpSuccessPage() { return <main className="auth-shell"><div className="auth-card"><Link href="/" className="brand-mark">study planner<span>.</span></Link><p className="eyebrow mt-10">One last step</p><h1 className="auth-title">Check your inbox.</h1><p className="auth-copy">We sent a confirmation link to your email. Confirm it, then sign in to open your workspace.</p><Link className="primary-button mt-8 w-full" href="/auth/login">Back to sign in</Link></div></main> }
