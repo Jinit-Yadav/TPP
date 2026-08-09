@@ -4,6 +4,7 @@ import { getCurrentUser } from '@/lib/auth'
 import { connectMongo } from '@/lib/mongodb'
 import { ArrowUpRight, BookOpen, CalendarDays, Clock3, LogOut, Sparkles } from 'lucide-react'
 import { DownloadPlanPdf } from '@/components/download-plan-pdf'
+import { DeletePlanButton } from '@/components/delete-plan-button'
 
 export default async function DashboardPage() {
   const user = await getCurrentUser()
@@ -55,7 +56,7 @@ export default async function DashboardPage() {
         <section className="dashboard-grid">
           <div className="paper-card dashboard-panel">
             <div className="panel-heading"><div><p className="eyebrow">Plan library</p><h2 className="mt-1 font-mono text-2xl font-bold">Saved plans</h2></div><CalendarDays className="text-primary" size={21} /></div>
-            {plans.length ? <div className="mt-6 grid gap-3">{plans.map((saved) => <article key={String(saved._id)} className="plan-list-item"><div className="plan-list-icon"><BookOpen size={16} /></div><div className="min-w-0 flex-1"><h3 className="truncate font-semibold">{saved.title}</h3><p className="mt-1 text-xs text-muted-foreground">Updated {new Date(saved.updatedAt || saved.createdAt).toLocaleDateString()}</p></div><DownloadPlanPdf plan={saved.planData} title={saved.title} /></article>)}</div> : <div className="empty-workspace"><BookOpen size={20} /><p>No saved plans yet.</p><Link href="/" className="font-semibold text-primary">Build your first plan</Link></div>}
+            {plans.length ? <div className="mt-6 grid gap-3">{plans.map((saved) => <article key={String(saved._id)} className="plan-list-item"><div className="plan-list-icon"><BookOpen size={16} /></div><div className="min-w-0 flex-1"><h3 className="truncate font-semibold">{saved.title}</h3><p className="mt-1 text-xs text-muted-foreground">Updated {new Date(saved.updatedAt || saved.createdAt).toLocaleDateString()}</p></div><div className="flex items-center gap-2"><DeletePlanButton planId={String(saved._id)} /><DownloadPlanPdf plan={saved.planData} title={saved.title} /></div></article>)}</div> : <div className="empty-workspace"><BookOpen size={20} /><p>No saved plans yet.</p><Link href="/" className="font-semibold text-primary">Build your first plan</Link></div>}
           </div>
 
           <div className="dashboard-side">
