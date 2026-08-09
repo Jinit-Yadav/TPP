@@ -2,7 +2,8 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
 import { connectMongo } from '@/lib/mongodb'
-import { ArrowUpRight, BookOpen, CalendarDays, Clock3, LogOut, Sparkles } from 'lucide-react'
+import { ArrowUpRight, BookOpen, CalendarDays, Clock3, Sparkles } from 'lucide-react'
+import { LogoutButton } from '@/components/logout-button'
 import { DownloadPlanPdf } from '@/components/download-plan-pdf'
 import { DeletePlanButton } from '@/components/delete-plan-button'
 
@@ -26,9 +27,7 @@ export default async function DashboardPage() {
         <Link href="/" className="brand-mark">study planner<span>.</span></Link>
         <div className="flex items-center gap-3">
           <span className="hidden max-w-48 truncate text-xs text-muted-foreground sm:inline">{user.email}</span>
-          <form action="/api/auth/logout" method="post">
-            <button className="secondary-button"><LogOut size={15} /> Log out</button>
-          </form>
+          <LogoutButton />
         </div>
       </header>
 
